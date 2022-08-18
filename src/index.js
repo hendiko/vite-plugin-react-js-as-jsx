@@ -4,10 +4,6 @@
  * @Description:
  */
 import babelCore from "@babel/core";
-const cwd = process.cwd();
-// 获取react版本
-const version = require(cwd + "/node_modules/react/package.json").version;
-const greatThan17 = parseInt(version.split(".")[0]) >= 17;
 
 const isRegexp = (any) => any instanceof RegExp;
 const isFunction = (any) => typeof any === "function";
@@ -31,11 +27,11 @@ const makeMatch = (rule) =>
  */
 function vitePluginReactJsAsJsx(babelPlugins, options) {
   const {
-    jsxInject = true,
-    rule = /\.(js|ts)$/,
-    include = [],
     exclude = [],
+    jsxInject = true,
     ignoreNodeModules = true, // default to ignore node_modules directory
+    include = [],
+    rule = /\.(js|ts)$/,
   } = options || {};
 
   const canMatch = makeMatch(rule);
@@ -56,7 +52,6 @@ function vitePluginReactJsAsJsx(babelPlugins, options) {
     transform(source, id) {
       if (canMatch(id) && canInclude(id)) {
         if (
-          greatThan17 &&
           jsxInject &&
           source.indexOf("import React") === -1 &&
           source.indexOf('from "react"') === -1 &&
