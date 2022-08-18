@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-react-js-as-jsx",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "vite plugin support for react with .js file",
   "main": "dist/index.js",
   "scripts": {
